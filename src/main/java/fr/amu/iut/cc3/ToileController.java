@@ -66,6 +66,7 @@ public class ToileController implements Initializable {
                  pane.getChildren().remove(i); // Only circles have id for now
              }
          }
+         errorLabel.setText("");
     }
 
     int getXRadarChart(double value, int axe ){
