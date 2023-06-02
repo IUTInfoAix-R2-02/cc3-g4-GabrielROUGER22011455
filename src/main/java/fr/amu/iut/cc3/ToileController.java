@@ -62,7 +62,9 @@ public class ToileController implements Initializable {
     @FXML
     void empty() {
          for (int i=0 ; i<pane.getChildren().size() ; ++i) {
-             System.out.println(pane.getChildren());
+             if (pane.getChildren().get(i).getId() != null) {
+                 pane.getChildren().remove(i); // Only circles have id for now
+             }
          }
     }
 
