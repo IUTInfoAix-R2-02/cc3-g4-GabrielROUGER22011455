@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<HBox id="scene" prefHeight="420.0" prefWidth="650.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+<HBox id="scene" prefHeight="420.0" prefWidth="650.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.amu.iut.cc3.ToileController">
     <Pane prefHeight="400.0" prefWidth="400.0" >
         <Circle centerX="200.0" centerY="200.0" radius="200.0" styleClass="toile"/>
         <Circle centerX="200.0" centerY="200.0" radius="150.0" styleClass="toile"/>
@@ -30,27 +30,27 @@
     <VBox spacing="20">
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="realiserLabel" text="Compétence 1 - Réaliser"/>
-            <TextField fx:id="realiserTextField" prefWidth="50" alignment="BOTTOM_RIGHT"/>
+            <TextField fx:id="comp1" prefWidth="50" alignment="BOTTOM_RIGHT" onAction="#draw"/>
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="optimiserLabel" text="Compétence 2 - Optimiser"/>
-            <TextField fx:id="optimiserTextField" prefWidth="50"/>
+            <TextField fx:id="comp2" prefWidth="50"/>
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="administrerLabel" text="Compétence 3 - Administrer"/>
-            <TextField fx:id="administrerTextField" prefWidth="50"/>
+            <TextField fx:id="comp3" prefWidth="50"/>
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="gererLabel" text="Compétence 4 - Gérer"/>
-            <TextField fx:id="gererTextField" prefWidth="50"/>
+            <TextField fx:id="comp4" prefWidth="50"/>
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="conduireLabel" text="Compétence 5 - Conduire"/>
-            <TextField fx:id="conduireTextField" prefWidth="50"/>
+            <TextField fx:id="comp5" prefWidth="50"/>
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="collaborerLabel" text="Compétence 6 - Collaborer"/>
-            <TextField fx:id="collaborerTextField" prefWidth="50"/>
+            <TextField fx:id="comp6" prefWidth="50"/>
         </HBox>
         <HBox alignment="BOTTOM_RIGHT" spacing="20">
             <Button fx:id="tracerButton" text="Tracer"/>

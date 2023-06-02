@@ -9,12 +9,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ToileApp extends Application {
-
     @Override
     public void start(Stage primaryStage) throws IOException {
+        // Chargement du fichier FXML
         Parent root = FXMLLoader.load(getClass().getResource("toile.fxml"));
+        // Configuration de la fenêtre
         primaryStage.setResizable(false);
         primaryStage.setScene( new Scene(root) );
+        primaryStage.setTitle("Résultats aux différentes compétences du BUT");
         primaryStage.show();
     }
 
