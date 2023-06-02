@@ -55,7 +55,7 @@
         <Label fx:id="errorLabel"/>
         <HBox alignment="BOTTOM_RIGHT" spacing="20">
             <Button fx:id="tracerButton" text="Tracer"/>
-            <Button fx:id="viderButton" text="Vider"/>
+            <Button fx:id="viderButton" text="Vider" onAction="#empty"/>
         </HBox>
     </VBox>
 </HBox>

@@ -41,20 +41,29 @@ public class ToileController implements Initializable {
         if (value > 20 || value < 0) inputError();
         else draw(value, axe);
     }
-
     void draw(int value, int axe){
-
-        // Draw the circle at the right location
+        // Remove the old circle
+        for (int i=0 ; i<pane.getChildren().size() ; ++i) {
+            if (pane.getChildren().get(i).getId() != null
+                    &&pane.getChildren().get(i).getId().equals("circle"+axe)) pane.getChildren().remove(i);
+        }
+        // Add the new circle
         Circle circle = new Circle();
         circle.setCenterX(getXRadarChart(value, axe));
         circle.setCenterY(getYRadarChart(value, axe));
         circle.setRadius(6);
+        circle.setId("circle"+axe);
         pane.getChildren().add(circle);
     }
-
     void inputError () {
         errorLabel.setText("Erreur de saisie : \nLes valeurs doivent être entre 0 et 20");
         errorLabel.setTextFill(Color.web("#FF0000"));
+    }
+    @FXML
+    void empty() {
+         for (int i=0 ; i<pane.getChildren().size() ; ++i) {
+             System.out.println(pane.getChildren());
+         }
     }
 
     int getXRadarChart(double value, int axe ){
