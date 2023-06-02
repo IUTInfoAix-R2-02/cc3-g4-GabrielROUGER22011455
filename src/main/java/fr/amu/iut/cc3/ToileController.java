@@ -8,8 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ToileController implements Initializable {
@@ -17,6 +19,7 @@ public class ToileController implements Initializable {
     Pane pane;
     @FXML
     Label errorLabel;
+    ArrayList<Circle> circleList;
     private static int rayonCercleExterieur = 200;
     private static int angleEnDegre = 60;
     private static int angleDepart = 90;
@@ -29,6 +32,7 @@ public class ToileController implements Initializable {
     public ToileController () {
         pane = new Pane();
         errorLabel = new Label();
+        circleList = new ArrayList<Circle>();
     }
 
     @FXML
@@ -39,13 +43,16 @@ public class ToileController implements Initializable {
         int axe = Integer.parseInt(String.valueOf(source.getId().charAt(4)));
 
         if (value > 20 || value < 0) inputError();
-        else draw(value, axe);
+        else addCircle(value, axe);
     }
-    void draw(int value, int axe){
+    void addCircle(int value, int axe){
         // Remove the old circle
         for (int i=0 ; i<pane.getChildren().size() ; ++i) {
             if (pane.getChildren().get(i).getId() != null
-                    &&pane.getChildren().get(i).getId().equals("circle"+axe)) pane.getChildren().remove(i);
+                    &&pane.getChildren().get(i).getId().equals("circle"+axe)) {
+                circleList.remove(pane.getChildren().get(i));
+                pane.getChildren().remove(i);
+            }
         }
         // Add the new circle
         Circle circle = new Circle();
@@ -54,19 +61,52 @@ public class ToileController implements Initializable {
         circle.setRadius(6);
         circle.setId("circle"+axe);
         pane.getChildren().add(circle);
+        circleList.add(circle);
+        System.out.println(circleList);
     }
     void inputError () {
         errorLabel.setText("Erreur de saisie : \nLes valeurs doivent être entre 0 et 20");
-        errorLabel.setTextFill(Color.web("#FF0000"));
+        errorLabel.setTextFill(Color.RED);
     }
     @FXML
-    void empty() {
+    void erase() {
          for (int i=0 ; i<pane.getChildren().size() ; ++i) {
              if (pane.getChildren().get(i).getId() != null) {
-                 pane.getChildren().remove(i); // Only circles have id for now
+                 pane.getChildren().remove(i); // Only circles and lines have id for now
              }
          }
          errorLabel.setText("");
+    }
+    @FXML
+    void draw () {
+        if (circleList.size() != 6) {
+            // erreur
+        }
+        else {
+            Circle start = null;
+            Circle end = null;
+            for (int i = 1 ; i <= 5 ; ++i ) {
+                for (int j = 0 ; j < 6 ; ++j ) {
+                    if (circleList.get(j).getId().equals("circle"+i)) start = circleList.get(j);
+                    if (circleList.get(j).getId().equals("circle"+(i+1))) end = circleList.get(j);
+                }
+                drawLine(start, end);
+            }
+            for (int i = 0 ; i < 6 ; ++i ) {
+                if (circleList.get(i).getId().equals("circle6")) start = circleList.get(i);
+                if (circleList.get(i).getId().equals("circle1")) end = circleList.get(i);
+            }
+            drawLine(start, end);
+        }
+    }
+    void drawLine(Circle start, Circle end) {
+        Line line = new Line();
+        line.setStartX(start.getCenterX());
+        line.setStartY(start.getCenterY());
+        line.setEndX(end.getCenterX());
+        line.setEndY(end.getCenterY());
+        line.setId("Line");
+        pane.getChildren().add(line);
     }
 
     int getXRadarChart(double value, int axe ){
