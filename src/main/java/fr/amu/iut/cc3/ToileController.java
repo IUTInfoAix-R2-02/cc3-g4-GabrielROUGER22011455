@@ -3,8 +3,10 @@ package fr.amu.iut.cc3;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
@@ -13,6 +15,8 @@ import java.util.ResourceBundle;
 public class ToileController implements Initializable {
     @FXML
     Pane pane;
+    @FXML
+    Label errorLabel;
     private static int rayonCercleExterieur = 200;
     private static int angleEnDegre = 60;
     private static int angleDepart = 90;
@@ -24,14 +28,21 @@ public class ToileController implements Initializable {
 
     public ToileController () {
         pane = new Pane();
+        errorLabel = new Label();
     }
 
     @FXML
-    void draw(ActionEvent event){
+    void addValue (ActionEvent event) {
         // Get event informations
         TextField source = (TextField) event.getSource();
         int value = Integer.parseInt(source.getText());
         int axe = Integer.parseInt(String.valueOf(source.getId().charAt(4)));
+
+        if (value > 20 || value < 0) inputError();
+        else draw(value, axe);
+    }
+
+    void draw(int value, int axe){
 
         // Draw the circle at the right location
         Circle circle = new Circle();
@@ -39,6 +50,11 @@ public class ToileController implements Initializable {
         circle.setCenterY(getYRadarChart(value, axe));
         circle.setRadius(6);
         pane.getChildren().add(circle);
+    }
+
+    void inputError () {
+        errorLabel.setText("Erreur de saisie : \nLes valeurs doivent être entre 0 et 20");
+        errorLabel.setTextFill(Color.web("#FF0000"));
     }
 
     int getXRadarChart(double value, int axe ){
