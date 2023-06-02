@@ -20,6 +20,7 @@ public class ToileController implements Initializable {
     @FXML
     Label errorLabel;
     ArrayList<Circle> circleList;
+    Boolean drawn;
     private static int rayonCercleExterieur = 200;
     private static int angleEnDegre = 60;
     private static int angleDepart = 90;
@@ -33,17 +34,22 @@ public class ToileController implements Initializable {
         pane = new Pane();
         errorLabel = new Label();
         circleList = new ArrayList<Circle>();
+        drawn = false;
     }
 
     @FXML
     void addValue (ActionEvent event) {
         // Get event informations
         TextField source = (TextField) event.getSource();
-        int value = Integer.parseInt(source.getText());
-        int axe = Integer.parseInt(String.valueOf(source.getId().charAt(4)));
+        if (source.getText()!="") {
+            int value = Integer.parseInt(source.getText());
+            int axe = Integer.parseInt(String.valueOf(source.getId().charAt(4)));
 
-        if (value > 20 || value < 0) inputError();
-        else addCircle(value, axe);
+            if (value > 20 || value < 0) inputError();
+            else addCircle(value, axe);
+
+            if (drawn) draw();
+        }
     }
     void addCircle(int value, int axe){
         // Remove the old circle
@@ -62,7 +68,6 @@ public class ToileController implements Initializable {
         circle.setId("circle"+axe);
         pane.getChildren().add(circle);
         circleList.add(circle);
-        System.out.println(circleList);
     }
     void inputError () {
         errorLabel.setText("Erreur de saisie : \nLes valeurs doivent être entre 0 et 20");
@@ -77,12 +82,18 @@ public class ToileController implements Initializable {
          }
          errorLabel.setText("");
     }
+    void eraseLines(){
+        for (int i=0 ; i<pane.getChildren().size() ; ++i) {
+            if (pane.getChildren().get(i).getId() != null
+                    && pane.getChildren().get(i).getId().equals("Line")) {
+                pane.getChildren().remove(i);
+            }
+        }
+    }
     @FXML
     void draw () {
-        if (circleList.size() != 6) {
-            // erreur
-        }
-        else {
+        if (circleList.size() == 6) {
+            eraseLines();
             Circle start = null;
             Circle end = null;
             for (int i = 1 ; i <= 5 ; ++i ) {
@@ -97,6 +108,7 @@ public class ToileController implements Initializable {
                 if (circleList.get(i).getId().equals("circle1")) end = circleList.get(i);
             }
             drawLine(start, end);
+            drawn = true;
         }
     }
     void drawLine(Circle start, Circle end) {
