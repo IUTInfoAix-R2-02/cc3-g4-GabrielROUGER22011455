@@ -27,32 +27,32 @@
         <Text x="26" y="99" text="Compétence 6" />
         <Pane fx:id="toile" styleClass="toile"/>
     </Pane>
-    <VBox>
-        <HBox>
+    <VBox spacing="20">
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="realiserLabel" text="Compétence 1 - Réaliser"/>
-            <TextField fx:id="realiserTextField" prefWidth="50"/>
+            <TextField fx:id="realiserTextField" prefWidth="50" alignment="BOTTOM_RIGHT"/>
         </HBox>
-        <HBox>
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="optimiserLabel" text="Compétence 2 - Optimiser"/>
             <TextField fx:id="optimiserTextField" prefWidth="50"/>
         </HBox>
-        <HBox>
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="administrerLabel" text="Compétence 3 - Administrer"/>
             <TextField fx:id="administrerTextField" prefWidth="50"/>
         </HBox>
-        <HBox>
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="gererLabel" text="Compétence 4 - Gérer"/>
             <TextField fx:id="gererTextField" prefWidth="50"/>
         </HBox>
-        <HBox>
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="conduireLabel" text="Compétence 5 - Conduire"/>
             <TextField fx:id="conduireTextField" prefWidth="50"/>
         </HBox>
-        <HBox>
+        <HBox alignment="CENTER_LEFT">
             <Label fx:id="collaborerLabel" text="Compétence 6 - Collaborer"/>
             <TextField fx:id="collaborerTextField" prefWidth="50"/>
         </HBox>
-        <HBox>
+        <HBox alignment="BOTTOM_RIGHT" spacing="20">
             <Button fx:id="tracerButton" text="Tracer"/>
             <Button fx:id="viderButton" text="Tracer"/>
         </HBox>
