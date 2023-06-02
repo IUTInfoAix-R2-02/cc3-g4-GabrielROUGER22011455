@@ -1,4 +1,5 @@
 
+
 .toile {
     -fx-fill: "white";
     -fx-stroke: "#919090";
@@ -11,6 +12,6 @@
 }
 
 Line {
-    -fx-stroke: "blue";
+    -fx-stroke: "black";
     -fx-stroke-width: 2;
 }

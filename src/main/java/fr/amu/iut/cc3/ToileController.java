@@ -39,15 +39,12 @@ public class ToileController implements Initializable {
 
     @FXML
     void addValue (ActionEvent event) {
-        // Get event informations
         TextField source = (TextField) event.getSource();
         if (source.getText()!="") {
             int value = Integer.parseInt(source.getText());
             int axe = Integer.parseInt(String.valueOf(source.getId().charAt(4)));
-
             if (value > 20 || value < 0) inputError();
             else addCircle(value, axe);
-
             if (drawn) draw();
         }
     }
